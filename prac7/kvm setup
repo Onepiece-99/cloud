@@ -1,4 +1,5 @@
-Virtual Box -> System->Motherboard->Enable EFI and got to processor->Enable Nested VT –X/AMD -V.
+Virtual Box -> System->Motherboard->Enable EFI and 
+got to processor->Enable Nested VT –X/AMD -V.
 
 •	Update Ubuntu 22.04.03
  sudo apt update
