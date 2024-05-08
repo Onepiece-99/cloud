@@ -1,0 +1,60 @@
+Virtual Box -> System->Motherboard->Enable EFI and got to processor->Enable Nested VT –X/AMD -V.
+
+•	Update Ubuntu 22.04.03
+ sudo apt update
+
+•	Check if Virtualization is enabled
+egrep -c '(vmx|svm)' /proc/cpuinfo
+kvm-ok
+sudo apt install -y cpu-checker
+kvm-ok
+
+•	Install KVM on Ubuntu 22.04.03
+sudo apt install -y qemu-kvm virt-manager libvirt-daemon-system virtinst libvirt-clients bridge-utils
+
+•	Start & Enable Virtualization Daemon
+sudo systemctl enable --now libvirtd
+sudo systemctl start libvirtd
+
+Confirm that the virtualization daemon is running as shown.
+sudo systemctl status libvirtd
+
+sudo usermod -aG kvm $USER
+sudo usermod -aG libvirt $USER
+To apply this change, you need to log out and log back again.
+
+•	Create Network Bridge (br0)
+sudo nano /etc/netplan/01-netcfg.yaml
+
+network:
+  ethernets:
+    enp0s3:
+      dhcp4: false
+      dhcp6: false
+  # add configuration for bridge interface
+  bridges:
+    br0:
+      interfaces: [enp0s3]
+      dhcp4: false
+      addresses: [192.168.1.162/24]
+      macaddress: 08:00:27:4b:1d:45
+      routes:
+        - to: default
+          via: 192.168.1.1
+          metric: 100
+      nameservers:
+        addresses: [4.2.2.2]
+      parameters:
+        stp: false
+      dhcp6: false
+  version: 2
+
+To apply above change, run ‘netplan apply’
+sudo netplan apply
+  
+Verify the network bridge ‘br0’, run below ip command
+ip add show
+
+Install debian-11.9.0-amd64-netinst.iso file
+If the GEMU/KVM is showing disconnected , restart the Ubuntu system 
+and connect it from network adapter(above right corner.)
