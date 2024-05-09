@@ -9,7 +9,7 @@ new_application=[]
 def create_application():
 
    try:
-      data = request.json
+      data = request.get_json()
       app_name = data.get('app_name')
       app_type = data.get('app_type')
       
