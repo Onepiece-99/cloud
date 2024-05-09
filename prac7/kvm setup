@@ -25,7 +25,7 @@ sudo usermod -aG kvm $USER
 sudo usermod -aG libvirt $USER
 To apply this change, you need to log out and log back again.
 
-•	Create Network Bridge (br0)
+•	Create Network Bridge (br0) (optional)
 sudo nano /etc/netplan/01-netcfg.yaml
 
 network:
