@@ -16,7 +16,14 @@ books = [
     }
 ]
 
-@app.route('/book', methods=['GET'])
+@app.route("/books", methods=["GET"])
+def get_books():
+   if len(books) != 0:
+      return jsonify({"Result: ": books})
+   else:
+      return jsonify({"Error: ": "Books not found"}), 400
+       
+@app.route('/all_books', methods=['GET'])
 def get_all_books():
     root = Et.Element('books')
     for book in books:
@@ -47,7 +54,7 @@ def add_a_book():
     }
     books.append(new_book)
     print(books)
-    return jsonify(new_book)
+    return jsonify({"New Book added:" new_book})
 
 @app.route("/book/edit/<int:book_id>",methods=["PUT"])
 def update_book(book_id):
@@ -69,4 +76,4 @@ def remove_book(book_id):
     return jsonify({"message":"Successfully removed the book."})
 
 if __name__ == '__main__':
-    app.run()
+    app.run()#(debug=True, port=2546)
