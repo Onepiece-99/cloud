@@ -3,6 +3,7 @@ got to processor->Enable Nested VT –X/AMD -V.
 
 •	Update Ubuntu 22.04.03
  sudo apt update
+ sudo apt upgrade
 
 •	Check if Virtualization is enabled
 egrep -c '(vmx|svm)' /proc/cpuinfo
