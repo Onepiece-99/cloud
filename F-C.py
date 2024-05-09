@@ -12,13 +12,13 @@ SOAPEnvelope = f"""<?xml version="1.0" encoding="utf-8"?>
   </soap:Body>
 </soap:Envelope>"""
 
-headers = {
+Headers = {
   "Content-Type": "text/xml; charset=utf-8",
   "SOAPAction": "https://www.w3schools.com/xml/FahrenheitToCelsius"  # Adding SOAPAction header
 }
-response = requests.post(url, data=SOAPEnvelope, headers=headers)
+response = requests.post(url=url, data=SOAPEnvelope, headers=Headers)
 root =ET.fromstring(response.text)
 
 for child in root.iter("{https://www.w3schools.com/xml/}FahrenheitToCelsiusResult"):
-  C2F=child.text
-  print(C2F)
+  F2C=child.text
+  print(F2C)
