@@ -10,12 +10,12 @@ storage = {"used": 0, "total": 1000}
 def create_server():
    global storage
    try:
-      data = request.json
-      server_name = data.get('server_name')
+      data = request.get_json()
+      name = data.get('server_name')
       cpu = data.get('cpu')
       ram = data.get('ram')
 
-      if not all([server_name, cpu, ram]):
+      if not all([name, cpu, ram]):
          raise ValueError("Invalid data. Server name, CPU, and RAM are required.")
 
       cpu = int(cpu)
@@ -23,7 +23,9 @@ def create_server():
 
       if cpu <= 0 or ram <= 0:
          raise ValueError("CPU and RAM must be positive integers.")
-
+      if cpu>10 and ram>1000:
+         raise ValueError("Error....overflow")
+         
       virtual_server = {"name": server_name, "cpu": cpu, "ram": ram}
       virtual_servers.append(virtual_server)
 
@@ -40,7 +42,8 @@ def list_servers():
 
 @app.route('/get_storage_status', methods=['GET'])
 def get_storage_status():
+   global storage
    return jsonify(storage)
 
 if __name__ == '__main__':
-   app.run(debug=True)
+   app.run(debug=True)#(port=9087, debug=True)
