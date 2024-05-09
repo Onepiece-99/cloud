@@ -11,7 +11,7 @@ Attached to: -> Bridge Network ->  click on Advanced option ->
 select "Allow ALL' -> ok.
 
 STEPS TO INSTALL OPENSTACK IN UBUNTU (cmds)
-perform within 'su-' for root privileage
+perform within root privileage cmd -> 'sudo'
 apt install git
 sudo useradd-s/bin/bash-d/opt/stack-m stack
 sudo chmod +x /opt/stack
