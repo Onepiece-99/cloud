@@ -1,0 +1,28 @@
+STEPS TO MAKE NAT NETWORK
+Open Virtual Box -> Tools -> right hand side click on NAT Networks Tab
+-> click on Create.
+
+STEPS FOR ADDING 2 NETWROK INTERFACE (machine must be off)
+Open Virtual Box -> Right click on the Ubuntu VM ->
+click on the "Settings" -> click on "Network"
+Adapter 1 -> Attached to: -> select NAT Network.
+Adapter 2 ->  check box "Enable network adapter option" ->
+Attached to: -> Bridge Network ->  click on Advanced option ->
+select "Allow ALL' -> ok.
+
+STEPS TO INSTALL OPENSTACK IN UBUNTU (cmds)
+perform within 'su-' for root privileage
+apt install git
+sudo useradd-s/bin/bash-d/opt/stack-m stack
+sudo chmod +x /opt/stack
+echo "stack ALL=(ALL)NOPASSWD:"ALL" | sudo tee/etc/sudoers.d/stack
+sudo -u stack -i
+git clone https://opendev.org/openstack/devstack
+cd devstack
+ADMIN_PASSWORD=admin
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+./stack.sh
+
+wait for 30 mins for the installation.
